@@ -34,7 +34,7 @@ nav ul {
 nav a.active {
     background-color:  #01ab76;
     border: 1px #01ab76 solid;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 nav h1 {
