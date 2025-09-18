@@ -1,0 +1,44 @@
+nav {
+    background-color: #000000;
+    margin: 0px;
+    border-bottom: #01ab76 solid 3px;
+    display: flex;
+    align-items: center;
+}
+
+nav ul li {
+    list-style: none;
+    font-size: var(--fs-sm);
+    margin: 5px 10px 5px 0px;
+}
+
+nav ul li a:hover {
+    border: 1px #01ab76 solid;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    padding: 5px 10px 5px 10px;
+    border: 1px solid transparent;
+    border-radius: 7%;
+}
+
+nav ul {
+    display:flex;
+    margin: 0px;
+    padding: 10px;
+}
+
+nav a.active {
+    background-color:  #01ab76;
+    border: 1px #01ab76 solid;
+    font-weight: 700;
+}
+
+nav h1 {
+    margin: 0 15px 0 15px;
+    font-family: 'DM Serif Text';
+    letter-spacing: 1px;
+}
