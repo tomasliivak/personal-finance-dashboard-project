@@ -2,7 +2,7 @@ import './App.css'
 import { Routes, Route } from "react-router-dom"
 import navLinks from "./data/routes.jsx"
 import NavBar from "./components/NavBar.jsx"
-
+import { DataProvider } from "./context/DataContext.jsx"
 
 
 
@@ -13,12 +13,14 @@ export default function App() {
 
   return (
     <div className="app">
+      <DataProvider>
     <NavBar />
       <main className="content">
           <Routes>
             {routesList}
           </Routes>
       </main>
+      </DataProvider>
     </div>
   )
 }

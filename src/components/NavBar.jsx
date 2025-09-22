@@ -16,7 +16,7 @@ export default function NavBar() {
     )
     return (
         <nav>
-            <h1>Finance Dashboard</h1>
+            <h1>Investment Dashboard</h1>
             <ul>
                 {navArray}
             </ul>
