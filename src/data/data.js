@@ -18,13 +18,13 @@ function normalizeRow(r) {
   const action = String(r.Action || "").trim().toUpperCase();
   const qty = Number(r.Quantity);
 
-  if (!date || !ticker || !["BUY", "SELL"].includes(action) || !qty) {
+  if (!date || !ticker || !["BUY", "SELL", "CASH_IN"].includes(action) || !qty) {
     return null;
   }
   return { date, ticker, action, qty };
 }
 
 export async function loadPrices() {
-  const res = await fetch("/prices.json");
+  const res = await fetch("/price.json");
   return res.json();
 }

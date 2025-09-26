@@ -10,10 +10,10 @@ data = {}
 
 for i in tickers:
     df = yf.download(i, start=start, end=end)
-    data[i] = [
-    {"date": str(idx.date()), "close": float(row["Close"])}
-    for idx, row in df.iterrows()
-]
+    data[i] = {
+        str(idx.date()) : {"close" : float(row["Close"])}
+        for idx, row in df.iterrows()
+    }
 
 with open("../public/price.json", "w") as f:
     json.dump(data, f, indent=2)
