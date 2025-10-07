@@ -23,23 +23,52 @@ export default function Home() {
     },[ready,transactions,prices])
 
     return (
-        <section id="home">
-            <div>
-            <Card> 
-                <h3>Account Balances</h3>
-                <p>Total Holdings: ${totalHoldings}</p>
-                <p>Total Cash: ${totalCash}</p>
-                <p>Total Balance: ${totalBalance}</p>
-                <p>Yearly Return: {totalReturn*100}%</p>
-            </Card>
-            <Card>
-                <h3>Assets</h3>
-            </Card>
+        <section>
+            <h1 id="summaryTitle">Summary</h1>
+            <div id="cardChart">
+                    <Card>
+                        <div>
+                            <h2>Total Balance</h2>
+                        </div>
+                        <div id="chartValueTitles">
+                            <div>
+                                <p>Total Value</p>
+                                <h2>${totalBalance}</h2>
+                            </div>
+                            <div>
+                                <p>Yearly Change</p>
+                                <h3>{totalReturn*100}%</h3>
+                            </div>
+                        </div>
+                        {ready ? <PerformanceChart transactions={transactions} prices={prices}/> : null}
+                    </Card>
+                </div>
+            <div id="home">
+                <div>
+                <Card> 
+                    <h2>Positions</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Ticker</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>Market Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>AAPL</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                </Card>
+                <Card>
+                    <h2>Assets</h2>
+                </Card>
+                </div>
             </div>
-            <Card>
-                <h3>Portfolio Performance</h3>
-                {ready ? <PerformanceChart transactions={transactions} prices={prices}/> : null}
-            </Card>
         </section>
     )
 }

@@ -1,4 +1,23 @@
-#home {
+
+#cardChart {
+    width: fill;
+    
+}
+
+#summaryTitle {
+    font-weight: 300;
+    margin-left: 2rem;
+    margin-block: 1rem;
+}
+
+#chartValueTitles {
     display: flex;
-    justify-content: space-evenly;
+    margin-top: 1.5rem;
+    margin-left: 0.5rem;
+    margin-bottom: 1rem;
+    align-items: end;
+}
+
+#chartValueTitles > div {
+    margin-right: 2rem;
 }

@@ -88,3 +88,19 @@ export function datesAndPricesForYear(year, transactions, prices) {
     value: calculateTotalBalance(transactions, prices, date)
   }))
 }
+
+export function currentPositions(transactions, prices, date="2024-12-30") {
+  let positions = {}
+  for (const t of transactions) {
+    if (t.date > date) continue
+    if (t.ticker === "CASH") continue
+    if (t.action === "BUY") {
+      positions[t.ticker] = {...t.ticker, avgCost : (((positions[t.ticker].avgCost || 0)* (positions[t.ticker].qty || 0))+(t.qty*t.price))/((positions[t.ticker].qty || 0) + (t.qty || 0)), qty: (positions[t.ticker].qty || 0) + (t.qty || 0)}
+      
+    }
+    else if (t.action === "SELL") {
+      positions[t.ticker] = {...t.ticker, qty: (postions[t.ticker].qty || 0) - (t.qty || 0)}
+    }
+  }
+  return positions
+}
