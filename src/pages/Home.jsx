@@ -1,8 +1,8 @@
 import "./Home.css"
 import Card from "../components/Card.jsx"
 import { useData } from "../context/DataContext.jsx"
-import { calculateHoldingsValue, calculateCash, calculateTotalBalance, calculateTotalReturn} from "../utils/math.js"
-import {useState, useEffect} from "react"
+import { calculateHoldingsValue, calculateCash, calculateTotalBalance, calculateTotalReturn, currentPositions} from "../utils/math.js"
+import {useState, useEffect, useMemo} from "react"
 import PerformanceChart from "../components/PerformanceChart.jsx"
 
 export default function Home() {
@@ -11,17 +11,32 @@ export default function Home() {
     const [totalCash, setCash]= useState()
     const [totalHoldings, setHoldings]= useState()
     const [totalReturn,setTotalReturn] = useState()
+    const [positions, setPositions] = useState()
+    const [positionsComps, setPositionsComps] = useState()
     function setValues() {
         setTotalBalance(calculateTotalBalance(transactions,prices))
         setCash(calculateCash(transactions))
         setHoldings(calculateHoldingsValue(transactions,prices))
         setTotalReturn(calculateTotalReturn(transactions,prices,startingBalance))
+        const pos = currentPositions(transactions,prices)
+        setPositions(pos)
+        
+        setPositionsComps(Object.entries(pos).map(([ticker,data]) => (
+            <tr>
+                <td className="tickerEntry">{ticker}</td>
+                <td>{data.qty}</td>
+                <td>${Math.round(data.avgCost * 100) / 100}</td>
+                <td>${Math.round(data.mktPrice * 100) / 100}</td>
+                <td style={{ color: data.return >= 0 ? "#01ab76" : "#d64b4b" }}>${Math.round(data.return * 100) / 100}</td>
+            </tr> ) ))
     }
     
     useEffect(() => {
-        if (ready) setValues();
+        if (ready) {
+            setValues() 
+        }
     },[ready,transactions,prices])
-
+    
     return (
         <section>
             <h1 id="summaryTitle">Summary</h1>
@@ -47,19 +62,18 @@ export default function Home() {
                 <div>
                 <Card> 
                     <h2>Positions</h2>
-                    <table>
+                    <table id="positions">
                         <thead>
                             <tr>
                                 <th>Ticker</th>
                                 <th>Quantity</th>
-                                <th>Price</th>
+                                <th>Cost</th>
                                 <th>Market Value</th>
+                                <th>Gain \ Loss</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>AAPL</td>
-                            </tr>
+                            {ready ? positionsComps : null}
                         </tbody>
                     </table>
                     

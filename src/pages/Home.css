@@ -21,3 +21,19 @@
 #chartValueTitles > div {
     margin-right: 2rem;
 }
+#positions {
+    border-collapse: collapse;
+}
+#positions td.tickerEntry {
+    text-align: left;
+}
+
+#positions td, #positions th{
+    padding-block: 0.7rem;
+    padding-inline: 4rem;
+    text-align: right;
+    margin: 0px;
+    border-bottom: 1px #6a6a6a solid;
+    /* #01ab76 #6a6a6a #525252 */
+}
+

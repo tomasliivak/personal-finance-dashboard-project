@@ -4,6 +4,11 @@ nav {
     border-bottom: #01ab76 solid 3px;
     display: flex;
     align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;     
+    z-index: 1000;
 }
 
 nav ul li {
