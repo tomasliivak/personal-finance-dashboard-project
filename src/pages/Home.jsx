@@ -2,7 +2,7 @@ import "./Home.css"
 import Card from "../components/Card.jsx"
 import { useData } from "../context/DataContext.jsx"
 import { calculateHoldingsValue, calculateCash, calculateTotalBalance, calculateTotalReturn, currentPositions} from "../utils/math.js"
-import {useState, useEffect, useMemo} from "react"
+import {useState, useEffect} from "react"
 import PerformanceChart from "../components/PerformanceChart.jsx"
 
 export default function Home() {
@@ -11,7 +11,6 @@ export default function Home() {
     const [totalCash, setCash]= useState()
     const [totalHoldings, setHoldings]= useState()
     const [totalReturn,setTotalReturn] = useState()
-    const [positions, setPositions] = useState()
     const [positionsComps, setPositionsComps] = useState()
     function setValues() {
         setTotalBalance(calculateTotalBalance(transactions,prices))
@@ -19,7 +18,6 @@ export default function Home() {
         setHoldings(calculateHoldingsValue(transactions,prices))
         setTotalReturn(calculateTotalReturn(transactions,prices,startingBalance))
         const pos = currentPositions(transactions,prices)
-        setPositions(pos)
         
         setPositionsComps(Object.entries(pos).map(([ticker,data]) => (
             <tr>
@@ -40,10 +38,27 @@ export default function Home() {
     return (
         <section>
             <h1 id="summaryTitle">Summary</h1>
+            <Card>
+                    <h2>Account Balances</h2>
+                    <div id="ValueTitles">
+                        <div >
+                            <p>Cash</p>
+                            <h2>${totalCash}</h2>
+                        </div>
+                        <div>
+                            <p>Holdings</p>
+                            <h2>${totalHoldings}</h2>
+                        </div>
+                        <div>
+                            <p>Account Value</p>
+                            <h2>${totalBalance}</h2>
+                        </div>
+                    </div>
+                </Card>
             <div id="cardChart">
                     <Card>
                         <div>
-                            <h2>Total Balance</h2>
+                            <h2>Balance Over Time</h2>
                         </div>
                         <div id="chartValueTitles">
                             <div>
@@ -58,8 +73,7 @@ export default function Home() {
                         {ready ? <PerformanceChart transactions={transactions} prices={prices}/> : null}
                     </Card>
                 </div>
-            <div id="home">
-                <div>
+            <div>
                 <Card> 
                     <h2>Positions</h2>
                     <table id="positions">
@@ -76,13 +90,9 @@ export default function Home() {
                             {ready ? positionsComps : null}
                         </tbody>
                     </table>
-                    
                 </Card>
-                <Card>
-                    <h2>Assets</h2>
-                </Card>
-                </div>
             </div>
+            
         </section>
     )
 }

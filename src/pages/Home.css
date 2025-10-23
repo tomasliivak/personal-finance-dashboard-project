@@ -18,9 +18,11 @@
     align-items: end;
 }
 
+
 #chartValueTitles > div {
     margin-right: 2rem;
 }
+
 #positions {
     border-collapse: collapse;
 }
@@ -37,3 +39,16 @@
     /* #01ab76 #6a6a6a #525252 */
 }
 
+#ValueTitles {
+    display: flex;
+    margin-top: 1.5rem;
+    margin-left: 0.5rem;
+    margin-bottom: 1rem;
+    align-items: end;
+    text-align:center;
+}
+
+
+#ValueTitles > div {
+    margin-right: 2rem;
+}
