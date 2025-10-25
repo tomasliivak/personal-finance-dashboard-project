@@ -34,7 +34,7 @@ export function calculateTotalBalance(transactions,prices,date="2024-12-30") {
 }
 
 export function calculateTotalReturn(transactions,prices,startingBalance,date="2024-12-30") {
-    return Math.round(((calculateTotalBalance(transactions,prices,date)-startingBalance)/startingBalance)*10000)/10000
+    return [Math.round(((calculateTotalBalance(transactions,prices,date)-startingBalance)/startingBalance)*10000)/10000, calculateTotalBalance(transactions,prices,date)-startingBalance]
 }
 
 function getDatesForYear(year) {
@@ -117,4 +117,14 @@ export function currentPositions(transactions, prices, date="2024-12-30") {
   }
   console.log(positions)
   return positions
+}
+
+export function calculateTotalCostBasis(transactions,prices,date="2024-12-30"){
+  const pos = currentPositions(transactions,prices,date)
+  let total = 0
+  for (const [key, value] of Object.entries(pos)) {
+    total += (value.avgCost * value.qty)
+  }
+  console.log(total)
+  return total
 }

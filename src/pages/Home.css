@@ -1,6 +1,6 @@
 
 #cardChart {
-    width: fill;
+    width: 100%;
     
 }
 
@@ -23,14 +23,14 @@
     margin-right: 2rem;
 }
 
-#positions {
+.baseTable {
     border-collapse: collapse;
 }
-#positions td.tickerEntry {
+.baseTable td.tickerEntry {
     text-align: left;
 }
 
-#positions td, #positions th{
+.baseTable td, .baseTable th{
     padding-block: 0.7rem;
     padding-inline: 4rem;
     text-align: right;

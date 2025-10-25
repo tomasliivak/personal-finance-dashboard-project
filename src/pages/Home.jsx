@@ -23,9 +23,9 @@ export default function Home() {
             <tr>
                 <td className="tickerEntry">{ticker}</td>
                 <td>{data.qty}</td>
-                <td>${Math.round(data.avgCost * 100) / 100}</td>
-                <td>${Math.round(data.mktPrice * 100) / 100}</td>
-                <td style={{ color: data.return >= 0 ? "#01ab76" : "#d64b4b" }}>${Math.round(data.return * 100) / 100}</td>
+                <td>{(data.avgCost*data.qty).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
+                <td>{(data.mktPrice*data.qty).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
+                <td style={{ color: data.return >= 0 ? "#01ab76" : "#d64b4b" }}>{(data.return*data.qty).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
             </tr> ) ))
     }
     
@@ -43,15 +43,15 @@ export default function Home() {
                     <div id="ValueTitles">
                         <div >
                             <p>Cash</p>
-                            <h2>${totalCash}</h2>
+                            <h2>{totalCash != undefined ? totalCash.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) : 'Loading...'}</h2>
                         </div>
                         <div>
                             <p>Holdings</p>
-                            <h2>${totalHoldings}</h2>
+                            <h2>{totalHoldings != undefined ? totalHoldings.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) : 'Loading...'}</h2>
                         </div>
                         <div>
                             <p>Account Value</p>
-                            <h2>${totalBalance}</h2>
+                            <h2>{totalBalance != undefined ? totalBalance.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) : 'Loading...'}</h2>
                         </div>
                     </div>
                 </Card>
@@ -63,11 +63,11 @@ export default function Home() {
                         <div id="chartValueTitles">
                             <div>
                                 <p>Total Value</p>
-                                <h2>${totalBalance}</h2>
+                                <h2>{totalBalance != undefined ? totalBalance.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) : 'Loading...'}</h2>
                             </div>
                             <div>
                                 <p>Yearly Change</p>
-                                <h3>{totalReturn*100}%</h3>
+                                <h3>{totalReturn != undefined ? totalReturn[0]*100 : null}%</h3>
                             </div>
                         </div>
                         {ready ? <PerformanceChart transactions={transactions} prices={prices}/> : null}
@@ -76,12 +76,12 @@ export default function Home() {
             <div>
                 <Card> 
                     <h2>Positions</h2>
-                    <table id="positions">
+                    <table className="baseTable">
                         <thead>
                             <tr>
                                 <th>Ticker</th>
                                 <th>Quantity</th>
-                                <th>Cost</th>
+                                <th>Cost Basis</th>
                                 <th>Market Value</th>
                                 <th>Gain \ Loss</th>
                             </tr>
