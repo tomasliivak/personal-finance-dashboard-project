@@ -37,7 +37,10 @@ export default function Home() {
     
     return (
         <section>
-            <h1 id="summaryTitle">Summary</h1>
+            <div className="titleDiv">
+                <h1 className="pageTitle">Summary</h1>
+                <p>Updated: 2024-12-30</p>
+            </div>
             <Card>
                     <h2>Account Balances</h2>
                     <div id="ValueTitles">

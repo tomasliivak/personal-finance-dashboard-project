@@ -5,4 +5,6 @@
     padding: 20px;
     margin-inline: 15px;
     margin-bottom: 30px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.4);
+    border: 1px solid #1f2937;
 }

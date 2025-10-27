@@ -14,7 +14,7 @@ export default function App() {
   return (
     <div className="app">
       <DataProvider>
-    <NavBar />
+      <NavBar />
       <main className="content">
           <Routes>
             {routesList}

@@ -115,7 +115,7 @@ export function currentPositions(transactions, prices, date="2024-12-30") {
       return: ((price ?? 0) - (values.avgCost ?? 0))
     }
   }
-  console.log(positions)
+  
   return positions
 }
 
@@ -125,6 +125,6 @@ export function calculateTotalCostBasis(transactions,prices,date="2024-12-30"){
   for (const [key, value] of Object.entries(pos)) {
     total += (value.avgCost * value.qty)
   }
-  console.log(total)
+
   return total
 }

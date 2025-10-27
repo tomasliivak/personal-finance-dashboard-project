@@ -4,7 +4,7 @@
     
 }
 
-#summaryTitle {
+.pageTitle {
     font-weight: 300;
     margin-left: 2rem;
     margin-block: 1rem;
@@ -38,6 +38,15 @@
     border-bottom: 1px #6a6a6a solid;
     /* #01ab76 #6a6a6a #525252 */
 }
+.baseTable th {
+    color: #EAB308; /* Tailwind slate-400 — dimmer gray for headers */
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  
+  .baseTable td {
+    color: #e5e7eb; /* Tailwind gray-200 — brighter than header */
+  }
 
 #ValueTitles {
     display: flex;
@@ -51,4 +60,14 @@
 
 #ValueTitles > div {
     margin-right: 2rem;
+}
+
+.titleDiv {
+    display: flex;
+    align-items: center;
+}
+.titleDiv > p {
+    margin-left: auto;
+    margin-right: 1.5rem;
+    opacity: 50%;
 }

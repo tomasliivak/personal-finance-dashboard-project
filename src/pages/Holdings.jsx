@@ -39,7 +39,10 @@ export default function Holdings() {
 
     return (
         <section>
-            <h1 id="summaryTitle">Holdings</h1>
+            <div className="titleDiv">
+                <h1 className="pageTitle">Holdings</h1>
+                <p>Updated: 2024-12-30</p>
+            </div>
             <Card> 
                 <h2>Position Details</h2>
                 <table className="baseTable">
