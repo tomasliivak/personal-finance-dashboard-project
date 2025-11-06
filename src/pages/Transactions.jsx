@@ -3,6 +3,7 @@ import Card from "../components/Card.jsx"
 import { useData } from "../context/DataContext.jsx"
 import { calculateHoldingsValue, calculateCash, calculateTotalBalance, calculateTotalReturn, currentPositions, calculateTotalCostBasis} from "../utils/math.js"
 import {useState, useMemo} from "react"
+import { NavLink } from "react-router-dom"
 export default function Transactions() {
     const { transactions, prices, ready, startingBalance } = useData()
     const txnsRows = useMemo(() => {
@@ -23,7 +24,9 @@ export default function Transactions() {
         <section>
             <div className="titleDiv">
                 <h1 className="pageTitle">Transactions</h1>
-                <p>Updated: 2024-12-30</p>
+                <NavLink to={"/transactions/editor"} className = {({isActive}) => (isActive ? "active" : "")}>
+                                Edit Transactions
+                </NavLink>
             </div>
             <Card>
                 <table className="baseTable" id="transactionsTable">

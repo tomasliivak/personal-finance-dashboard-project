@@ -1,3 +1,20 @@
 #transactionsTable {
     margin-inline: auto;
 }
+
+.titleDiv > a {
+    margin-left: auto;
+    margin-right: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    padding: 5px 10px 5px 10px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    background: #d64b4b;
+}
+
+/* "#01ab76" : "#d64b4b" */
+
+.titleDiv > a:hover {
+    background: #b63e38 
+}
