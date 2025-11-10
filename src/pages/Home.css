@@ -24,7 +24,15 @@
 }
 
 .baseTable {
-    border-collapse: collapse;
+    border-collapse: separate;
+  border-spacing: 0;
+  background: #0d0d0d;
+  border: 1px solid #222;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 10px;
+  width: 100%;
+  table-layout: fixed;
 }
 .baseTable td.tickerEntry {
     text-align: left;
@@ -35,17 +43,21 @@
     padding-inline: 4rem;
     text-align: right;
     margin: 0px;
-    border-bottom: 1px #6a6a6a solid;
-    /* #01ab76 #6a6a6a #525252 */
+    border-bottom: 1px #222 solid;
 }
 .baseTable th {
-    color: #EAB308; /* Tailwind slate-400 — dimmer gray for headers */
+    color: #EAB308; 
     font-weight: 600;
     letter-spacing: 0.02em;
   }
   
   .baseTable td {
-    color: #e5e7eb; /* Tailwind gray-200 — brighter than header */
+    color: #e5e7eb; 
+  }
+  .blank-row td {
+    height: 15px;        /* or whatever spacing */
+    background: transparent;
+    border: none;
   }
 
 #ValueTitles {

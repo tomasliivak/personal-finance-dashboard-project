@@ -5,10 +5,13 @@ import {loadTransactions, loadPrices } from "../data/data.js"
 const DataContext = createContext();
 
 export function DataProvider({children}) {
-    const [transactions, setTransactions] = useState([]) 
+    const stored = localStorage.getItem("transactions");
+    const initialTxns = stored ? JSON.parse(stored) : [];
+    const [transactions, setTransactions] = useState(initialTxns);
     const [prices, setPrices] = useState({})
     const [ready, setReady] = useState(false)
     const [startingBalance, setStartingBalance] = useState()
+    const [restart, setRestart] = useState(false)
 
     useEffect(() => {
         (async () => {
@@ -18,38 +21,40 @@ export function DataProvider({children}) {
                 for (const t in px) out[t] = Object.keys(px[t]).sort();
                 return out;
                 } )()
-            const enrichedTxns = txns.map(txn => {
-                if (txn.ticker == "CASH") {
-                    return {...txn, price: null}
-                }
-                
-                return {
-                    ...txn,
-                    price:
-                      px[txn.ticker]?.[txn.date]?.close ??
-                      (() => {
-                        
-                        const dateList = datesByTicker[txn.ticker] || []
-                        if (dateList.length === 0) return null
-                        
-                        
-                        let lo = 0, hi = dateList.length
-                        while (lo < hi) {
-                          const mid = (lo + hi) >> 1
-                          if (dateList[mid] <= txn.date) lo = mid + 1
-                          else hi = mid
-                        }
-                  
-                        if (lo === 0) return null           
-                        const prevDate = dateList[lo - 1]
-                        
-                        return px[txn.ticker]?.[prevDate]?.close ?? null
-                      })()
-                  }
-                  
-                  
-            })
-            setTransactions(enrichedTxns)
+            if (transactions.length == 0) {
+                const enrichedTxns = txns.map(txn => {
+                    if (txn.ticker == "CASH") {
+                        return {...txn, price: null}
+                    }
+
+                    return {
+                        ...txn,
+                        price:
+                        px[txn.ticker]?.[txn.date]?.close ??
+                        (() => {
+                            
+                            const dateList = datesByTicker[txn.ticker] || []
+                            if (dateList.length === 0) return null
+                            
+                            
+                            let lo = 0, hi = dateList.length
+                            while (lo < hi) {
+                            const mid = (lo + hi) >> 1
+                            if (dateList[mid] <= txn.date) lo = mid + 1
+                            else hi = mid
+                            }
+                    
+                            if (lo === 0) return null           
+                            const prevDate = dateList[lo - 1]
+                            
+                            return px[txn.ticker]?.[prevDate]?.close ?? null
+                        })()
+                    }
+                    
+                    
+                })
+            setTransactions(enrichedTxns) 
+            }
             setPrices(px)
             setReady(true)
             let cash = 0
@@ -60,10 +65,14 @@ export function DataProvider({children}) {
             }
             setStartingBalance(cash)
         })()
-    }, [])
+    }, [restart])
+
+    useEffect(() => {
+        localStorage.setItem("transactions", JSON.stringify(transactions));
+      }, [transactions]);
 
     return (
-        <DataContext.Provider value={{transactions, prices, ready, startingBalance, setTransactions}}>
+        <DataContext.Provider value={{transactions, prices, ready, startingBalance, setTransactions, setRestart}}>
             {children}
         </DataContext.Provider>
     )

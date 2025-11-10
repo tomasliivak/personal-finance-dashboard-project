@@ -59,10 +59,18 @@ export default function Holdings() {
                     <tbody>
                         {ready ? positionsComps : null}
                         <tr>
+                            <td className="tickerEntry">Cash</td>
+                            <td>{totalCash!= undefined ? totalCash.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) : 'Loading...'}</td>
+                            <td></td>
+                            <td>{totalCash!= undefined ? totalCash.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) : 'Loading...'}</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
                             <td className="tickerEntry" style={{ fontWeight: 700}} classname="totalTd">Total</td>
                             <td></td>
                             <td style={{ fontWeight: 700 }} classname="totalTd">{totalCostBasis != undefined ? totalCostBasis.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) : 'Loading...'}</td>
-                            <td style={{ fontWeight: 700 }} classname="totalTd">{totalHoldings != undefined ? totalHoldings.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) : 'Loading...'}</td>
+                            <td style={{ fontWeight: 700 }} classname="totalTd">{totalBalance != undefined ? totalBalance.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) : 'Loading...'}</td>
                             <td style={{ color: totalReturn != undefined ? (totalReturn[1] >= 0 ? "#01ab76" : "#d64b4b" ) : null, fontWeight: 700 }} classname="totalTd">{totalReturn != undefined ? totalReturn[1].toLocaleString('en-US', { style: 'currency', currency: 'USD' }) : 'Loading...'}</td>
                             <td style={{ color: totalReturn != undefined ? (totalReturn[1] >= 0 ? "#01ab76" : "#d64b4b" ) : null, fontWeight: 700 }} classname="totalTd">{totalReturn != undefined ? totalReturn[0]*100 : "Loading..."}%</td>
                         </tr>

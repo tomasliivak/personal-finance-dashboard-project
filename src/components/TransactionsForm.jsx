@@ -1,6 +1,8 @@
 import { useState } from "react"
+import "./TransactionsForm.css"
+import {calculateCash} from "../utils/math.js"
 
-export default function TransactionForm({ onSubmit, prices }) {
+export default function TransactionForm({ onSubmit, prices, transactions}) {
   const [date, setDate] = useState("")
   const [action, setAction] = useState("")
   const [ticker, setTicker] = useState("")
@@ -14,14 +16,16 @@ export default function TransactionForm({ onSubmit, prices }) {
       action,
       ticker,
       qty: Number(qty),
-      price: prices[ticker]?.[date]?.close ?? 0  // use price from data
+      price: prices[ticker]?.[date]?.close ?? 0 
     }
 
     onSubmit(txn)
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="add-txn-form"onSubmit={handleSubmit}>
+        <h2>Add Transaction</h2>
+        <div id="form-inputs">
       <input
         type="date"
         value={date}
@@ -51,17 +55,53 @@ export default function TransactionForm({ onSubmit, prices }) {
         value={qty}
         onChange={e => setQty(e.target.value)}
       />
-
-      <p className="form-price">
-        Share Price: {prices[ticker]?.[date]?.close
-          ? `$${prices[ticker][date].close}`
-          : ""}
-      </p>
-      <p className="form-price">
-        Total Transaction Price: {prices[ticker]?.[date]?.close
-          ? `$${prices[ticker][date].close * qty}`
-          : ""}
-      </p>
+      </div>
+      <div className="form-prices">
+        <div>
+            <p>
+            Share Price:
+            </p>
+            <p>
+            {prices[ticker]?.[date]?.close
+                ? `$${Math.round(prices[ticker][date].close * 100) /100}`
+                : ""}
+            </p>
+        </div>
+        <div>
+            <p>
+            Total Transaction Price:
+            </p>
+            <p>
+            {action == "BUY" || action == "CASH_OUT" ? prices[ticker]?.[date]?.close
+                ? `-$${Math.round(prices[ticker][date].close * qty * 100 ) /100}`
+                : "" : prices[ticker]?.[date]?.close
+                ? `$${Math.round(prices[ticker][date].close * qty * 100 ) /100}`
+                : "" }
+            </p>
+        </div>
+        <div>
+            <p>
+            Available Cash at Transaction Date:
+            </p>
+            <p>
+            {calculateCash(transactions,date)}
+            </p>
+        </div>
+        <div>
+            <p>
+            Cash after Transaction:
+            </p>
+            <p>
+            
+            {action == "BUY" || action == "CASH_OUT" ? (Math.round((calculateCash(transactions,date)-(prices[ticker]?.[date]?.close
+                ? prices[ticker][date].close * qty
+                : 0))*100)/100) : (Math.round((calculateCash(transactions,date)+(prices[ticker]?.[date]?.close
+                    ? prices[ticker][date].close * qty
+                    : 0))*100)/100)}
+            </p>
+        </div>
+        
+      </div>
 
 
       <button type="submit">Add Transaction</button>

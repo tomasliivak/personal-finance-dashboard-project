@@ -1,0 +1,82 @@
+.add-txn-form {
+    background: #111;
+    border: 1px solid #0f7a42;
+    border-radius: 10px;
+    color: #e6e6e6;
+    font-size: 0.95rem;
+    padding: 20px;
+    margin-inline: 15px;
+    margin-bottom: 30px;
+  }
+
+  .add-txn-form > h2 {
+    margin-bottom: 15px;
+  }
+  
+  #form-inputs {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  #form-inputs input,
+  #form-inputs select {
+    background: #1a1a1a;
+    color: #e6e6e6;
+    border: 1px solid #333;
+    border-radius: 6px;
+    padding: 0.55rem 0.75rem;
+    font-size: 0.9rem;
+    min-width: 120px;
+  }
+  
+  #form-inputs input:focus,
+  #form-inputs select:focus {
+    outline: none;
+    border-color: #12d95a;
+    box-shadow: 0 0 8px rgba(18, 217, 90, 0.4);
+  }
+  
+  .form-prices {
+    margin-top: 0.75rem;
+    background: #0d0d0d;
+    border: 1px solid #222;
+    border-radius: 8px;
+    padding: 0.75rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.25rem 1rem;
+  }
+  
+  .form-prices div {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.25rem 0;
+    border-bottom: 1px solid #222;
+  }
+  
+  
+  .form-prices p {
+    margin: 0;
+    font-size: 0.88rem;
+    color: #ccc;
+  }
+  
+  /* button */
+  .add-txn-form button {
+    margin-top: 1rem;
+    background: #12d95a;
+    color: #000;
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+  }
+  
+  .add-txn-form button:hover {
+    background: #16f26d;
+  }
+  

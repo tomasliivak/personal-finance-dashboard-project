@@ -1,9 +1,91 @@
 #editorDone:hover {
-    background: #01895e 
+    background: #01895e;
 }
 
 #editorDone {
     background: #01ab76;
 }
+.txn-delete-btn {
+    background: #d64b4b;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.15s ease-in-out;
+}
+
+.txn-delete-btn:hover {
+    background: #b63e38;
+    transform: scale(1.12);
+    box-shadow: 0 0 6px rgba(255, 60, 40, 0.5);
+}
+/* #8a1f1a #b63e38 */
+
+#editorTable td:last-child,
+#editorTable th:last-child {
+    text-align: right;
+    padding-right: 4rem;
+    padding-left: 0;
+    width:10px;
+    
+}
+
+#editorTable {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.toast-error {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    background: #d64b4b;
+    color: #fff;
+    padding-block: 8px;
+    padding-inline: 15px;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    font-size: 0.9rem;
+    font-weight: 600;
+    z-index: 9999;
+  
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: toastIn 0.5s forwards;
+  }
+  
+  @keyframes toastIn {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  .titleDiv > button {
+    margin-left: auto;
+    margin-right: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    padding-block: 10px;
+    padding-inline: 5px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    background: #d64b4b;
+}
 
 /* "#01ab76" : "#d64b4b" */
+
+.titleDiv > button:hover {
+    background: #b63e38 
+}
+
+.titleDiv > #editorDone {
+    margin-left: 0.5rem;
+    margin-right: 1.5rem;
+}

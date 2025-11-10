@@ -15,7 +15,9 @@ export function useTransactionEditor() {
             break
         }
         }
-
+        if (txn.action == "" ) {
+            return false
+        }
         if (!found && txn.ticker !== "CASH") {
             return false
           }
@@ -156,8 +158,9 @@ export function useTransactionEditor() {
                 const updated = [...prev, txn]
                 return updated.sort((a, b) => a.date.localeCompare(b.date))
               })
+            return true
         } else {
-            alert("Invalid transaction")
+            return false
         }
     }
 
