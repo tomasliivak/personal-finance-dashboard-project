@@ -24,7 +24,7 @@ export default function Transactions() {
         <section>
             <div className="titleDiv">
                 <h1 className="pageTitle">Transactions</h1>
-                <NavLink to={"/transactions/editor"} className = {({isActive}) => (isActive ? "active" : "")}>
+                <NavLink to={"/transactions/editor"}>
                                 Edit Transactions
                 </NavLink>
             </div>

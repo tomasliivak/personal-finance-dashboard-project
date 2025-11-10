@@ -84,7 +84,7 @@ export function currentPositions(transactions, prices, date="2024-12-30") {
     else if (t.action === "SELL") {
       positions[t.ticker] = {
         ...cur,
-        qty: Math.max(0, (cur.qty || 0) - (t.qty || 0))
+        qty: Math.max(0, (cur.qty || 0) - (t.qty || 0)), avgCost: Math.max(0, (cur.qty || 0) - (t.qty || 0)) === 0 ? 0 : cur.avgCost
       }
     }
   }
@@ -109,10 +109,14 @@ export function currentPositions(transactions, prices, date="2024-12-30") {
       })())
     )
 
-    positions[ticker] = {
-      ...values,
-      mktPrice: price,
-      return: ((price ?? 0) - (values.avgCost ?? 0))
+    if (values.qty !== 0) {
+      positions[ticker] = {
+        ...values,
+        mktPrice: price,
+        return: ((price ?? 0) - (values.avgCost ?? 0))
+      }
+    } else {
+      delete positions[ticker]  
     }
   }
   
