@@ -4,16 +4,15 @@ import {useState, useMemo} from "react"
 import Card from "../components/Card.jsx"
 import TransactionForm from "../components/TransactionsForm.jsx"
 import { useData } from "../context/DataContext.jsx"
-import { calculateHoldingsValue, calculateCash, calculateTotalBalance, calculateTotalReturn, currentPositions, calculateTotalCostBasis} from "../utils/math.js"
 import {useTransactionEditor} from "../data/useTransactionEditor.jsx"
 export default function Editor() {
-    const { transactions, setTransactions, prices, ready, startingBalance, setRestart} = useData()
+    const { transactions, setTransactions, prices, setRestart} = useData()
     const {deleteTxn} = useTransactionEditor()
     const {addTxn} = useTransactionEditor()
 
     const [errorMsg, setErrorMsg] = useState("")
     function resetToDefault() {
-        if (window.confirm("Are you sure you want to delete ALL transactions?")) {
+        if (window.confirm("Are you sure you want to reset ALL transactions?")) {
           setTransactions([])
           localStorage.removeItem("transactions")
           setRestart(prev => !prev)
@@ -29,7 +28,16 @@ export default function Editor() {
                         <td style={{color : ((txn.action === "BUY" || txn.action === "CASH_IN")) ? "#01ab76" : "#d64b4b" }}>{txn.action}</td>
                         <td>{txn.qty}</td>
                         <td>{txn.price != undefined ? (txn.price).toLocaleString('en-US', { style: 'currency', currency: 'USD' }) : null}</td>
-                        <td classname="delete-column"><button className="txn-delete-btn"onClick={() => deleteTxn(txn,idx)}>x</button></td>
+                        <td classname="delete-column"><button className="txn-delete-btn"onClick={() => {
+                            const valid = deleteTxn(txn,idx)
+                            if (!valid) {
+                                setErrorMsg("Invalid change")
+        
+                                setTimeout(() => {
+                                    setErrorMsg("")
+                                }, 3500)
+                                }
+                        }}>x</button></td>
                     </tr> ) )
             )
         },[transactions])

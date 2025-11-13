@@ -1,11 +1,10 @@
 import "./transactions.css"
 import Card from "../components/Card.jsx"
 import { useData } from "../context/DataContext.jsx"
-import { calculateHoldingsValue, calculateCash, calculateTotalBalance, calculateTotalReturn, currentPositions, calculateTotalCostBasis} from "../utils/math.js"
-import {useState, useMemo} from "react"
+import {useMemo} from "react"
 import { NavLink } from "react-router-dom"
 export default function Transactions() {
-    const { transactions, prices, ready, startingBalance } = useData()
+    const { transactions} = useData()
     const txnsRows = useMemo(() => {
         return (
             transactions.map(txn => (

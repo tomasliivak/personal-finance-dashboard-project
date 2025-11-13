@@ -1,12 +1,12 @@
 import Card from "../components/Card.jsx"
 import PortfolioPieChart from "../components/PortfolioPieChart.jsx"
 import { useData } from "../context/DataContext.jsx"
-import { calculateHoldingsValue, calculateCash, calculateTotalBalance, calculateTotalReturn, currentPositions, calculateTotalCostBasis} from "../utils/math.js"
-import {useState, useEffect, useMemo} from "react"
+import {calculateCash, calculateTotalBalance, currentPositions} from "../utils/math.js"
+import {useState, useEffect} from "react"
 import "./Insights.css"
 
 export default function Insights() {
-    const { transactions, prices, ready, startingBalance } = useData()
+    const { transactions, prices, ready} = useData()
     const [pieChartData, setPieChartData] = useState()
     const [totalBalance, setTotalBalance] = useState()
     const [top5Returns, setTop5Returns] = useState()

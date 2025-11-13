@@ -1,9 +1,9 @@
 
 import {
-    ResponsiveContainer, LineChart, Line,
+    ResponsiveContainer, 
     XAxis, YAxis, Tooltip, CartesianGrid, Legend, AreaChart, Area
   } from "recharts"
-  import { useState, useMemo, useEffect} from "react"
+  import { useState, useMemo} from "react"
   import { datesAndPricesForYear } from "../utils/math.js"
   import "./PerformanceChart.css"
   

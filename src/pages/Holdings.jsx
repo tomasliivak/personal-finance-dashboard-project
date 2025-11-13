@@ -1,7 +1,7 @@
 import "./Holdings.css"
 import Card from "../components/Card.jsx"
 import { useData } from "../context/DataContext.jsx"
-import { calculateHoldingsValue, calculateCash, calculateTotalBalance, calculateTotalReturn, currentPositions, calculateTotalCostBasis} from "../utils/math.js"
+import {calculateCash, calculateTotalBalance, calculateTotalReturn, currentPositions, calculateTotalCostBasis} from "../utils/math.js"
 import {useState, useEffect} from "react"
 
 export default function Holdings() {
@@ -10,13 +10,11 @@ export default function Holdings() {
     const [positionsComps, setPositionsComps] = useState()
     const [totalBalance, setTotalBalance]= useState()
     const [totalCash, setCash]= useState()
-    const [totalHoldings, setHoldings]= useState()
     const [totalReturn,setTotalReturn] = useState()
     const [totalCostBasis, setTotalCostBasis] = useState()
     function setValues() {
         setTotalBalance(calculateTotalBalance(transactions,prices))
         setCash(calculateCash(transactions))
-        setHoldings(calculateHoldingsValue(transactions,prices))
         setTotalReturn(calculateTotalReturn(transactions,prices,startingBalance))
         setTotalCostBasis(calculateTotalCostBasis(transactions,prices))
         const pos = currentPositions(transactions,prices)

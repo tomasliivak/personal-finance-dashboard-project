@@ -1,6 +1,5 @@
 import { useData } from "../context/DataContext.jsx"
-import {useState, useMemo} from "react"
-import { calculateHoldingsValue, calculateCash, calculateTotalBalance, calculateTotalReturn, currentPositions, calculateTotalCostBasis} from "../utils/math.js"
+import {calculateCash, currentPositions} from "../utils/math.js"
 
 export function useTransactionEditor() {
     const { transactions, prices, ready, startingBalance, setTransactions } = useData()
@@ -145,10 +144,13 @@ export function useTransactionEditor() {
     }
     function deleteTxn(txn,idx) {
         // date, ticker, action, qty, price
-        console.log(checkValidAction(txn, "REMOVE"))
         if (checkValidAction(txn,"REMOVE")) {
             setTransactions(prev => prev.filter((_, i) => i !== idx))
-        }
+            return true
+        } 
+        else {
+            return false
+            }
     }
 
     function addTxn(txn) {
@@ -159,7 +161,8 @@ export function useTransactionEditor() {
                 return updated.sort((a, b) => a.date.localeCompare(b.date))
               })
             return true
-        } else {
+        } 
+        else {
             return false
         }
     }
